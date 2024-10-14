@@ -12,14 +12,14 @@ echo Python version compact is $PYVER_COMPACT
 mkdir -p build
 cd build
 cmake ..
-make
+make -j10
 cd ..
 
 nvcc -x cu \
     -std=c++17 \
-    -lpython${PYVER} \
+    -l/opt/conda/lib/python${PYVER} \
     --compiler-options -fPIC \
-    -I/usr/include/python${PYVER} \
+    -I/opt/conda/include/python${PYVER} \
     -I./extern/pybind11/include/ \
     -I./src -I/usr/include/python${PYVER} \
     --compiler-options -fPIC \
